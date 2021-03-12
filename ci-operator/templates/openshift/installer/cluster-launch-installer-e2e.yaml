@@ -769,6 +769,22 @@ objects:
           serviceNetwork:
             - fd02::/112
         EOF
+        elif has_variant "dualstack"; then
+          cat >> ${ARTIFACT_DIR}/installer/install-config.yaml << EOF
+        networking:
+          networkType: OVNKubernetes
+          machineNetwork:
+          - cidr: 10.0.0.0/16
+          - cidr: fd00::/48
+          clusterNetwork:
+          - cidr: 10.128.0.0/14
+            hostPrefix: 23
+          - cidr: fd00:10:128::/56
+            hostPrefix: 64
+          serviceNetwork:
+          - 172.30.0.0/16
+          - fd00:172:16::/112
+        EOF
         elif [[ -n "${network_type}" ]]; then
           cat >> ${ARTIFACT_DIR}/installer/install-config.yaml << EOF
         networking:
