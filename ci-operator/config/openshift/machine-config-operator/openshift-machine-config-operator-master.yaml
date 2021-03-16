@@ -133,6 +133,10 @@ tests:
   steps:
     cluster_profile: azure4
     workflow: openshift-e2e-azure
+- as: e2e-azure-ovn-dualstack
+  steps:
+    cluster_profile: azure4
+    workflow: openshift-e2e-azure-ovn-dualstack
 - as: e2e-aws-proxy
   steps:
     cluster_profile: aws
